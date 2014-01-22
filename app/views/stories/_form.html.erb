@@ -1,0 +1,12 @@
+<%= simple_form_for @story do |form| %>
+
+	<%= form.input :title %>
+	<%= form.input :description %>
+	<%= form.input :url, label: "Link" %>
+	<%= form.input :tag_list, label: "Tags" %>
+
+	<%= form.button :submit, "Save story" %>
+
+<% end %>
+
+<!-- Having an underscore tells the browser that the page is partial -->

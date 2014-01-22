@@ -1,0 +1,59 @@
+<%= content_for :page_title, @story.title %>
+
+<div class="single_story story">
+
+	<h2>
+		<%= link_to @story.title, @story.url %>
+	</h2>
+
+	<p>
+		<%= @story.description %>
+	</p>
+
+	<ul>
+		<li>
+		<%= link_to "Upvote", story_votes_path(@story),
+				 			  method: :post %>
+		</li>
+		<li><%= pluralize @story.votes.count, "vote" %></li>
+		<li><%= @story.nice_url %></li>
+		<li>posted <%= time_ago_in_words @story.created_at %> ago</li>
+	</ul>
+
+	<div class="actions">
+		<%= link_to "Edit", edit_story_path(@story), class: "edit" %>
+
+		<%= link_to "Delete",
+		 story_path(@story), 
+		 method: :delete,
+		 class: "delete",
+		 confirm: "Are you sure you want to delete this story?"
+		 %>
+	</div>
+
+	<h3><%= pluralize @story.tags.count, "tag" %></h3>
+
+	<ul>
+		<% @story.tags.each do |tag| %>
+
+		<li><%= tag %></li>
+
+	<% end %>
+	</ul>
+
+	<h3><%= pluralize @story.comments.count, "comment" %></h3>
+
+	<% @story.comments.each do |comment| %>
+
+		<div class="comment">
+			<%= simple_format comment.body %>
+			<p>posted <%= time_ago_in_words comment.created_at %> ago</p>
+		</div>
+
+	<% end %>
+
+	<p>
+		<%= link_to "Add a comment", new_story_comment_path(@story) %>
+	</p>
+
+</div>
